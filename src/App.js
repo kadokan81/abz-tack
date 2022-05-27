@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import FullScreanSection from './componets/FullScreanSection';
+import GetRequestSection from './componets/GetRequestSection';
+import Header from './componets/Header';
+import PostRequestSection from './componets/PostRequestSection';
+
+import { Container } from './styled/Container';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Container>
+			<Header />
+			<FullScreanSection />
+			<GetRequestSection />
+			<PostRequestSection />
+		</Container>
+	);
 }
 
 export default App;
