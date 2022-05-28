@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import back from '../img/back-photo.jpeg';
+import back from '../img/back-photo.webp';
 import { Button } from '../styled/Button';
 import { Heading } from '../styled/Heading';
 

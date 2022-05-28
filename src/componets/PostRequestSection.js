@@ -50,9 +50,7 @@ const PostRequestSection = () => {
 					return response.json();
 				})
 				.then(function (data) {
-					console.log(data);
 					sessionStorage.setItem('token', JSON.stringify(data.token));
-					console.log(sessionStorage.getItem('token'));
 				});
 	const onSubmit = async (data) => {
 		const newData = { ...data, position_id: parseInt(data.position_id) };
