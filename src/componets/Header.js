@@ -23,8 +23,12 @@ const Header = () => {
 				<MainLogo />
 			</div>
 			<div className='button-group'>
-				<Button>Users</Button>
-				<Button>SignUp</Button>
+				<a href='#users'>
+					<Button>Users</Button>
+				</a>
+				<a href='#sign-up'>
+					<Button>SignUp</Button>
+				</a>
 			</div>
 		</HeaderStyle>
 	);

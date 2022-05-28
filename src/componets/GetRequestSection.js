@@ -129,7 +129,7 @@ const GetRequestSection = () => {
 	const { users } = data;
 
 	return (
-		<GetRequesStyle>
+		<GetRequesStyle id='users'>
 			{isLoading ? (
 				<Spiner />
 			) : (

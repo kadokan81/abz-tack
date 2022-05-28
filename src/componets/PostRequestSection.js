@@ -86,7 +86,7 @@ const PostRequestSection = () => {
 	};
 
 	return (
-		<PostSectionStylr>
+		<PostSectionStylr id='sign-up'>
 			<Heading>
 				{success.success
 					? 'User successfully registered'
