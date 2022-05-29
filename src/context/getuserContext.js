@@ -9,8 +9,9 @@ export const getUsers = async (page = 1) => {
 
 const useGetUsers = (page = 1) => {
 	const data = useQuery(['users', page], () => getUsers(page), {
-		// keepPreviousData: true,
-		// staleTime: 5000,
+		retry: 2,
+		keepPreviousData: true,
+		staleTime: 5000,
 	});
 
 	return data;

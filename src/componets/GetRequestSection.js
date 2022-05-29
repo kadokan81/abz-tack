@@ -3,8 +3,9 @@ import { Heading } from '../styled/Heading';
 import Spiner from '../componets/Spiner';
 import UserCart from './UserCart';
 import { Button } from '../styled/Button';
-import { useState } from 'react';
-import useGetUsers from '../context/getuserContext';
+import { useEffect, useState } from 'react';
+import useGetUsers, { getUsers } from '../context/getuserContext';
+import { useQueryClient } from 'react-query';
 
 const GetRequesStyle = styled.section`
 	position: relative;
@@ -41,8 +42,17 @@ const CartsWrapper = styled.div`
 
 const GetRequestSection = () => {
 	const [pageCurrent, setPages] = useState(() => 1);
+	const qeryClient = useQueryClient();
 
-	const { isFetching, isLoading, error, data } = useGetUsers(pageCurrent);
+	const { isFetching, isLoading, error, data, isError } =
+		useGetUsers(pageCurrent);
+
+	useEffect(() => {
+		const nextPage = pageCurrent + 1;
+		if (data?.total_pages > pageCurrent) {
+			qeryClient.prefetchQuery(['users', nextPage], () => getUsers(nextPage));
+		}
+	}, [pageCurrent, qeryClient, data]);
 
 	if (isLoading || isFetching)
 		return (
@@ -51,7 +61,7 @@ const GetRequestSection = () => {
 			</GetRequesStyle>
 		);
 
-	if (error)
+	if (isError)
 		return (
 			<GetRequesStyle>
 				<Heading>{error.message}</Heading>
@@ -70,11 +80,13 @@ const GetRequestSection = () => {
 							<UserCart user={user} key={user.id} />
 						))}
 					</CartsWrapper>
-					<Button
-						disabled={data?.total_pages <= pageCurrent}
-						onClick={() => setPages((prev) => prev + 1)}>
-						{data?.total_pages <= pageCurrent ? 'No More' : 'Show more'}
-					</Button>
+					<div>
+						<Button
+							disabled={data?.total_pages <= pageCurrent}
+							onClick={() => setPages((prev) => prev + 1)}>
+							{data?.total_pages <= pageCurrent ? 'No More' : 'Show more'}
+						</Button>
+					</div>
 				</>
 			)}
 		</GetRequesStyle>
