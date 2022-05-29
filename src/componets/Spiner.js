@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 const SpinerAnim = styled.svg`
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	transform: translate(-50%, -50%), rotate(360deg);
+
 	@keyframes spin {
 		100% {
 			transform: rotate(360deg);
