@@ -9,8 +9,11 @@ const Textarea = ({ errorsObj, register }) => {
 	});
 	const onChangeHandler = (e) => {
 		const file = e.target.files[0];
+
 		setFileength({
 			filename: file.name,
+			size: file.size,
+			type: file.type,
 		});
 	};
 
@@ -25,9 +28,18 @@ const Textarea = ({ errorsObj, register }) => {
 				id='file'
 				type='file'
 				name='photo'
-				{...register('photo', { required: 'Photo is required' })}
+				{...register('photo', {
+					required: 'This is required.',
+					validate: {
+						lessThan5MB: (data) => data[0]?.size < 50000 || 'Max 5MB',
+						acceptedFormats: (data) =>
+							['image/jpeg', 'image/jpg'].includes(data[0]?.type) ||
+							'Only  JPEG and JPG',
+					},
+				})}
 				onChange={onChangeHandler}
 			/>
+
 			{errorsObj.photo && (
 				<ErrorSpan className='error-span'>{errorsObj.photo.message}</ErrorSpan>
 			)}

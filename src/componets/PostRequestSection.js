@@ -54,7 +54,7 @@ const PostRequestSection = () => {
 				});
 	const onSubmit = async (data) => {
 		const newData = { ...data, position_id: parseInt(data.position_id) };
-		console.log('data', newData);
+		// console.log('data', newData);
 
 		var formData = new FormData();
 
@@ -81,7 +81,7 @@ const PostRequestSection = () => {
 				if (data.success) {
 					refetch();
 				}
-				console.log(data);
+				// console.log(data);
 			});
 	};
 
